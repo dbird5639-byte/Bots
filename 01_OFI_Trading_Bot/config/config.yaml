@@ -1,0 +1,166 @@
+# OFI Trading Bot Configuration
+# Copy this file to config.yaml and update with your settings
+
+bot:
+  name: "OFI Trading Bot"
+  version: "1.0.0"
+  mode: "paper"  # live, paper, backtest
+  debug: true
+  log_level: "INFO"
+
+# Exchange configuration
+exchanges:
+  - name: "binance"
+    api_key: "your_api_key_here"
+    api_secret: "your_api_secret_here"
+    testnet: true
+    sandbox: true
+    rate_limit: 1200  # requests per minute
+    timeout: 30000    # milliseconds
+    
+  - name: "coinbase"
+    api_key: "your_api_key_here"
+    api_secret: "your_api_secret_here"
+    testnet: false
+    sandbox: false
+    rate_limit: 100
+    timeout: 30000
+
+# Trading pairs configuration
+trading_pairs:
+  - symbol: "BTC/USDT"
+    base_currency: "BTC"
+    quote_currency: "USDT"
+    min_order_size: 0.001
+    price_precision: 2
+    quantity_precision: 6
+    
+  - symbol: "ETH/USDT"
+    base_currency: "ETH"
+    quote_currency: "USDT"
+    min_order_size: 0.01
+    price_precision: 2
+    quantity_precision: 5
+
+# OFI Strategy parameters
+strategy:
+  name: "OFI_Imbalance_Strategy"
+  ofi_threshold: 0.6        # Minimum imbalance ratio (0.0-1.0)
+  position_size: 0.1         # Percentage of portfolio per trade (0.01-1.0)
+  max_positions: 3           # Maximum concurrent positions
+  min_volume_threshold: 1000 # Minimum volume in USDT
+  max_spread: 0.005          # Maximum bid-ask spread (0.5%)
+  
+  # Timeframes for analysis
+  timeframes:
+    - "1m"   # 1 minute
+    - "5m"   # 5 minutes
+    - "15m"  # 15 minutes
+    - "1h"   # 1 hour
+    
+  # Order book depth levels
+  order_book_depth: 20       # Number of levels to analyze
+  
+  # Signal filters
+  filters:
+    volatility_threshold: 0.02    # Minimum volatility (2%)
+    volume_ma_period: 20          # Volume moving average period
+    price_ma_period: 50           # Price moving average period
+
+# Risk management
+risk_management:
+  stop_loss: 0.02           # Stop loss percentage (2%)
+  take_profit: 0.04         # Take profit percentage (4%)
+  max_drawdown: 0.15        # Maximum portfolio drawdown (15%)
+  max_daily_loss: 0.05      # Maximum daily loss (5%)
+  max_position_size: 0.2    # Maximum position size (20% of portfolio)
+  
+  # Dynamic stop loss
+  trailing_stop:
+    enabled: true
+    activation_threshold: 0.015  # Activate at 1.5% profit
+    trailing_distance: 0.01      # Trail by 1%
+    
+  # Position sizing
+  position_sizing:
+    method: "kelly"              # kelly, fixed, martingale
+    kelly_fraction: 0.25         # Use 25% of Kelly criterion
+    max_leverage: 1.0            # Maximum leverage (1.0 = no leverage)
+
+# Data and storage
+data:
+  storage_type: "sqlite"         # sqlite, postgresql, mongodb
+  database_url: "sqlite:///data/trading_bot.db"
+  historical_data_path: "data/historical/"
+  backup_interval: 3600          # Backup every hour (seconds)
+  
+  # Data retention
+  retention:
+    trades: "1y"                 # Keep trade data for 1 year
+    order_book: "30d"            # Keep order book data for 30 days
+    market_data: "7d"            # Keep market data for 7 days
+
+# Logging configuration
+logging:
+  level: "INFO"
+  format: "{time:YYYY-MM-DD HH:mm:ss} | {level} | {name}:{function}:{line} | {message}"
+  file_path: "logs/trading_bot.log"
+  max_file_size: "10 MB"
+  backup_count: 5
+  
+  # Log rotation
+  rotation: "1 day"
+  compression: "gz"
+
+# Performance monitoring
+monitoring:
+  enabled: true
+  metrics_port: 8000
+  health_check_interval: 30     # seconds
+  
+  # Alerts
+  alerts:
+    email:
+      enabled: false
+      smtp_server: "smtp.gmail.com"
+      smtp_port: 587
+      username: "your_email@gmail.com"
+      password: "your_app_password"
+      recipients: ["your_email@gmail.com"]
+      
+    telegram:
+      enabled: false
+      bot_token: "your_bot_token"
+      chat_id: "your_chat_id"
+      
+    discord:
+      enabled: false
+      webhook_url: "your_webhook_url"
+
+# Backtesting configuration
+backtesting:
+  start_date: "2024-01-01"
+  end_date: "2024-12-31"
+  initial_balance: 10000         # USDT
+  commission: 0.001              # 0.1% commission
+  slippage: 0.0005               # 0.05% slippage
+  
+  # Performance metrics
+  metrics:
+    - "total_return"
+    - "sharpe_ratio"
+    - "max_drawdown"
+    - "win_rate"
+    - "profit_factor"
+    - "calmar_ratio"
+
+# Development and testing
+development:
+  mock_exchange: false
+  test_mode: true
+  seed: 42                       # Random seed for reproducible tests
+  
+  # API mocking
+  mock_api:
+    response_delay: 0.1          # Simulated API delay (seconds)
+    error_rate: 0.01             # Simulated error rate (1%)

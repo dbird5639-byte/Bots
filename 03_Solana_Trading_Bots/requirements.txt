@@ -1,0 +1,86 @@
+# Solana Trading Bots - Requirements
+
+# Solana blockchain integration
+solana==0.30.2
+solders==0.18.1
+anchorpy==0.18.0
+solana-py==0.30.2
+
+# Web3 and blockchain
+web3==6.11.3
+eth-account==0.9.0
+eth-typing==3.5.0
+
+# Trading and financial data
+ccxt==4.1.77
+pandas==2.1.4
+numpy==1.24.3
+ta==0.10.2
+scipy==1.11.4
+
+# Web framework and API
+fastapi==0.104.1
+uvicorn==0.24.0
+websockets==11.0.3
+requests==2.31.0
+aiohttp==3.9.1
+
+# Database and storage
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+redis==5.0.1
+sqlite3
+
+# Configuration and environment
+pyyaml==6.0.1
+python-dotenv==1.0.0
+pydantic==2.5.0
+pydantic-settings==2.1.0
+
+# Logging and monitoring
+loguru==0.7.2
+prometheus-client==0.19.0
+structlog==23.2.0
+
+# Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-mock==3.12.0
+pytest-cov==4.1.0
+
+# Development tools
+black==23.11.0
+flake8==6.1.0
+mypy==1.7.1
+isort==5.12.0
+
+# Machine learning and optimization
+scikit-learn==1.3.2
+optuna==3.4.0
+hyperopt==0.2.7
+
+# Visualization and analysis
+matplotlib==3.8.2
+seaborn==0.13.0
+plotly==5.17.0
+streamlit==1.28.1
+
+# Async and concurrency
+asyncio-mqtt==0.16.1
+aiofiles==23.2.1
+asyncio-throttle==0.1.0
+
+# Security and encryption
+cryptography==41.0.8
+hashlib
+secrets
+
+# Solana-specific tools
+base58==2.1.1
+construct==2.10.68
+nacl==1.5.0
+
+# Optional: Advanced features
+# transformers==4.35.2
+# torch==2.1.1
+# tensorflow==2.15.0
